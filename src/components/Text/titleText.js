@@ -12,7 +12,7 @@ class TitleText extends Component {
 
 const styles = StyleSheet.create({
   containText: {
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: "700",
     color: "#777EB0"
   }

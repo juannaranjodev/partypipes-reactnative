@@ -9,6 +9,7 @@ import NotificationScreen from "@screens/notification/notification";
 import ProfileScreen from "@screens/profile/profile";
 import NavView from "@screens/main-tabs/navView";
 import SideDrawer from "@screens/side-drawer/side-drawer";
+import SeeWorkingScreen from "@screens/today/see-working";
 import Header from "@screens/main-tabs/header";
 import configureStore from "./src/store/configureStore";
 const store = configureStore();
@@ -90,6 +91,13 @@ Navigation.registerComponent(
   store,
   Provider
 );
+
+Navigation.registerComponent(
+  "partypypes.SeeWorkingScreen",
+  () => SeeWorkingScreen,
+  store,
+  Provider
+)
 
 // Start a App
 Navigation.startSingleScreenApp({

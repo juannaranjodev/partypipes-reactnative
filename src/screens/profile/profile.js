@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
-// import TitleText from "@Component/Text/titleText";
+import { View, StyleSheet, ScrollView, Platform } from "react-native";
 import TitleText from "@Component/Text/titleText";
 import ButtonUI from "@Component/Button/buttonUI";
 import FormInput from "@Component/Input/form-input";
 import PickAvatar from "@Component/PickAvatar/pick-avatar";
 import MainText from "@Component/Text/main-text";
 import { saveUserProfile } from "../../store/actions/front-end-state-actions/profile";
-import Header from "../main-tabs/header";
 
 class ProfileScreen extends Component {
   state = {
@@ -161,7 +159,7 @@ class ProfileScreen extends Component {
 const styles = StyleSheet.create({
   root: {
     paddingLeft: 10,
-    paddingTop: 10
+    paddingTop: 20
   },
   subTitle: {
     fontSize: 18,

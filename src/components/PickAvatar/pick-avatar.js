@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Image, TouchableOpacity } from "react-native";
-import imagePlaceHolder from "../../assets/img/gy.jpg";
 import ImagePicker from "react-native-image-picker";
 
 var getInitials = function(string) {
