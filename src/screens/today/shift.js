@@ -1,51 +1,73 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from "react-native-vector-icons/Feather";
 import MainText from "@Component/Text/main-text";
-
-const shiftContext = "Bespoke at Westfield San Francisco Centre 845 Market Street, Suit 450, San Francisco";
+import NoteModal from './note-modal';
 
 export default class Shift extends Component {
+  state = {
+    isNoteModalVisible: false
+  }
+
+  modalVisible = () => {
+    this.setState({ isNoteModalVisible: true });
+  }
+
+  closeNote = () => {
+    this.setState({ isNoteModalVisible: false });
+  }
+
+  saveNote = () => {
+    this.setState({ isNoteModalVisible: false });
+  }
+
   render() {
-    const { colors } = this.props;
+    const { colors, shift } = this.props;
     return (
       <View style={[styles.shiftContainer, {backgroundColor: colors.backgroundColor}]}>
-        <MainText style={styles.shiftTime}>3:00pm - 10:00pm</MainText>
-        <MainText style={[styles.shiftText, {color: colors.color}]}>Load In</MainText>
-        <MainText style={[styles.shiftText, styles.shiftContext]}>{shiftContext}</MainText>
+        <MainText style={styles.shiftTime}>{shift.shiftStartTime} - {shift.shiftEndTime}</MainText>
+        <MainText style={[styles.shiftText, {color: colors.color}]}>{shift.shiftTitle}</MainText>
+        <MainText style={[styles.shiftText, styles.shiftContext]}>{shift.shiftContext}</MainText>
         <View style={styles.shiftTimesContainer}>
           <View style={styles.subTimesContainer}>
             <MainText style={[styles.shiftText, styles.shiftName]}>Clock In</MainText>
-            <MainText style={styles.shiftText}>2:58pm</MainText>
+            <MainText style={styles.shiftText}>{shift.clockTime}</MainText>
           </View>
-          <MainText style={[styles.shiftText, {color: colors.color}]}>2:03 hours</MainText>
+          <MainText style={[styles.shiftText, {color: colors.color}]}>{shift.clockHours}</MainText>
         </View>
         <View style={styles.shiftTimesContainer}>
           <View style={styles.subTimesContainer}>
             <MainText style={[styles.shiftText, styles.shiftName]}>Lunch break</MainText>
-            <MainText style={styles.shiftText}>4:58pm</MainText>
+            <MainText style={styles.shiftText}>{shift.breakTime}</MainText>
           </View>
-          <MainText style={[styles.shiftText, {color: colors.color}]}>2:03 hours</MainText>
+          <MainText style={[styles.shiftText, {color: colors.color}]}>{shift.breakHours}</MainText>
         </View>
         <View style={[styles.shiftTimesContainer,{marginTop: 10}]}>
-          {this.props.noteStatus ?
+          {shift.note !== "" ?
             <React.Fragment>
-              <MainText style={styles.shiftText}>$10.00 reimburse for parking</MainText>
-              <View style={styles.subTimesContainer}>
+              <MainText style={styles.shiftText}>{shift.note}</MainText>
+              <TouchableOpacity style={styles.subTimesContainer} onPress={this.modalVisible}>
                 <Icon name="edit-2" size={16} style={{marginRight: 3}} />
                 <MainText style={styles.shiftText}>Edit</MainText>
-              </View>
+              </TouchableOpacity>
             </React.Fragment>
             :
             <React.Fragment>
               <View></View>
-              <View style={styles.subTimesContainer}>
+              <TouchableOpacity style={styles.subTimesContainer} onPress={this.modalVisible}>
                 <Icon name="plus" size={16} style={{marginRight: 3}}/>
-                <MainText style={styles.shiftText}>Add note</MainText>
-              </View>
+                <MainText style={styles.shiftText}>Add note</MainText>  
+              </TouchableOpacity>
             </React.Fragment>
           }
         </View>
+        {shift.note !== "" ?
+          <NoteModal edit note={shift.note} isNoteModalVisible={this.state.isNoteModalVisible}
+            saveNote={this.saveNote} closeNote={this.closeNote} />
+          :
+          <NoteModal add isNoteModalVisible={this.state.isNoteModalVisible}
+            saveNote={this.saveNote} closeNote={this.closeNote} />
+        }
       </View>
     )
   }

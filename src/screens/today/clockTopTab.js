@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Switch, Image } from 'react-native'
+import { View, StyleSheet, Switch, Image, TouchableOpacity } from 'react-native'
 import MainText from "@Component/Text/main-text";
 import switchRounderImage from "../../assets/img/switcher-round-blue.png";
 import coffeeRounderImage from "../../assets/img/coffee-round-blue.png";
+import endBreakImage from '../../assets/img/end-break-orange.png';
 
 export default class ClockTopTab extends Component {
   render() {
-    const { toggleClock, clockValue } = this.props;
+    const { toggleClock, clockValue, openSwitch, openStartBreak, openEndBreak, isTakeBreak } = this.props;
     return (
       <View style={styles.clockTabContainer}>
         <View style={styles.clockSubTabContainer}>
@@ -21,19 +22,36 @@ export default class ClockTopTab extends Component {
         </View>
         {clockValue &&
           <View style={styles.clockSubTabContainer}>
-            <Image
-              style={styles.clockTabImage}
-              source={switchRounderImage}
-              resizeMode={"contain"}
-            />
-            <MainText style={styles.clockRightTabText}>Switch</MainText>
-            <Image
-            style={styles.clockTabImage}
-              source={coffeeRounderImage}
-              resizeMode={"contain"}
-            />
-            <MainText style={styles.clockRightTabText}>Take a break</MainText>
-          </View>}
+            <TouchableOpacity onPress={openSwitch} style={{flexDirection: "row"}}>
+              <Image
+                style={styles.clockTabImage}
+                source={switchRounderImage}
+                resizeMode={"contain"}
+              />
+              <MainText style={styles.clockRightTabText}>Switch</MainText>  
+          </TouchableOpacity>
+          {!isTakeBreak ? 
+              <TouchableOpacity onPress={openStartBreak} style={{flexDirection: "row"}}>
+                <Image
+                style={styles.clockTabImage}
+                  source={coffeeRounderImage}
+                  resizeMode={"contain"}
+                />
+                <MainText style={styles.clockRightTabText}>Take a break</MainText>
+              </TouchableOpacity>
+            :
+            <TouchableOpacity onPress={openEndBreak} style={{flexDirection: "row"}}>
+                <Image
+                style={styles.clockTabImage}
+                  source={endBreakImage}
+                  resizeMode={"contain"}
+                />
+                <MainText style={styles.clockRightTabText}>End break</MainText>
+            </TouchableOpacity>
+               }
+            
+          </View>
+        }
       </View>
     )
   }

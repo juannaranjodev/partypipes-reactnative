@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import Header from "../main-tabs/header";
 import { connect } from "react-redux";
+import MainText from "@Component/Text/main-text";
 import { saveCurrentScreen } from "../../store/actions/front-end-state-actions/navigation";
 
 class TimeOffScreen extends Component {
@@ -43,14 +44,40 @@ class TimeOffScreen extends Component {
   };
   render() {
     return (
-      <View>
-        <Header onToggleSideBar={this.onToggleSideBar} />
-        <Text>Time off</Text>
+      <View style={styles.noEventShiftContainer}>
+        <View style={styles.placeholderContainer}>
+        </View>
+        <MainText style={[styles.topRightText, styles.clockIntoShift]}>Clock in to a shift</MainText>
       </View>
     );
   }
 }
 
+const styles = StyleSheet.create({
+  topRightText: {
+    fontSize: 16,
+    fontWeight: "400",
+    color: "#777EB0",
+    textDecorationLine: "underline",
+    textDecorationStyle: "solid",
+    textDecorationColor: "#777EB0",
+  },
+  noEventShiftContainer: {
+    flex: 1,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  clockIntoShift: {
+    marginTop: 20
+  },
+  placeholderContainer: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    backgroundColor: 'rgba(240, 240, 245, 0.6)'
+  }
+})
 // const mapStateToProps = state => {
 //   return {
 //     naviationName: state.navigationStore.screenName

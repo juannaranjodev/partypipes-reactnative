@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native'
 import Icon from "react-native-vector-icons/Feather";
+import MapView from 'react-native-maps';
 import MainText from "@Component/Text/main-text";
 import TitleText from "@Component/Text/titleText";
 import Header from "../main-tabs/header";
 
 export default class SeeWorkingScreen extends Component {
+  state = {
+    focusedLocation: {
+      latitude: 37.7900532,
+      longitude: -122.4013726,
+      latitudeDelta: 0.0122,
+      longitudeDelta: Dimensions.get("window").width / Dimensions.get("window").height * 0.0122 
+    }
+  }
   onViewShifts = () => {
     this.props.navigator.push({
       title: "today",
@@ -24,10 +33,11 @@ export default class SeeWorkingScreen extends Component {
           <View style={styles.topHeader}>
             <TitleText>Today's Shifts</TitleText>
             <TouchableOpacity onPress={this.onViewShifts}>
-              <MainText style={styles.topRightText}>view shifts</MainText>
+              <MainText style={styles.topRightText}>View shifts</MainText>
             </TouchableOpacity>
           </View>
           <View style={styles.mapContainer}>
+            <MapView initialRegion={this.state.focusedLocation}/>
           </View>
           <View style={styles.staffContainer}>
             <View>
@@ -43,7 +53,7 @@ export default class SeeWorkingScreen extends Component {
             <View>
               <MainText style={styles.staffName}>Niko Beretic</MainText>
               <MainText style={styles.staffShift}>Anderson wedding Load In</MainText>
-            </View>
+            </View>  
             <View style={styles.staffRight}>
               <Icon name="map-pin" size={16} />
               <MainText style={styles.staffMapText}>Show on map</MainText>
