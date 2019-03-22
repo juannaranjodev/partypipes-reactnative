@@ -6,9 +6,6 @@ import MainText from "@Component/Text/main-text";
 export default class ClockModal extends Component {
   render() {
     const { isClockInVisible, isClockOutVisible, clockIn, clockOut, closeClockInModal, closeClockOutModal,
-      isSwitchModalVisible, switchBlock, closeSwichModal,
-      isBreakStartModalVisible, startBreak, closeStartBreakModal,
-      isBreakEndModalVisible, breakOver, closeBreakModal
     } = this.props;
     return (
       <View>

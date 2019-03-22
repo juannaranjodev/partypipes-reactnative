@@ -16,7 +16,7 @@ export default class NoShiftModal extends Component {
 
   render() {
     const {
-      isNoShiftModalVisible, clockIntoShift, closeClockIntoShiftModal,
+      isNoShiftModalVisible, clockIntoShiftModal, closeClockIntoShiftModal,
     } = this.props;
     return (
       <View>
@@ -30,7 +30,7 @@ export default class NoShiftModal extends Component {
                 marginTop: 10,
                 alignItems: 'flex-start',
                 }}>
-                <RadioForm
+                {/* <RadioForm
                   key={this.state.formKey}
                   radio_props={this.state.shiftTypes}
                   initial={this.state.initialRadioPos}
@@ -45,11 +45,11 @@ export default class NoShiftModal extends Component {
                   onPress={currentShift => {
                     this.setState({ currentShift });
                   }}
-                />
+                /> */}
               </View>
             </View>
             <View style={styles.modalButsContainer}>
-              <TouchableOpacity onPress={clockIntoShift} style={[styles.modalButton, styles.modalbutSuccess]}>
+              <TouchableOpacity onPress={clockIntoShiftModal} style={[styles.modalButton, styles.modalbutSuccess]}>
                <MainText style={{ color: "white" }}>Clock in</MainText>
               </TouchableOpacity>
               <TouchableOpacity onPress={closeClockIntoShiftModal} style={[styles.modalButton,styles.modalButCancel]}>

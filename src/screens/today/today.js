@@ -81,7 +81,7 @@ class TodayScreen extends Component {
     isNoShiftModalVisible: false
   }
 
-  clockIntoShift = () => {
+  clockIntoShiftModal = () => {
     this.setState({ isNoShiftModalVisible: false });
   }
 
@@ -206,7 +206,6 @@ class TodayScreen extends Component {
     });
   }
 
-
   render() {
     return (
       <View style={{flex: 1}}>
@@ -263,7 +262,7 @@ class TodayScreen extends Component {
           breakOver={this.breakOver} closeBreakModal={this.closeBreakModal}
         />
         <NoShiftModal isNoShiftModalVisible={this.state.isNoShiftModalVisible}
-          clockIntoShift={this.clockIntoShift}
+          clockIntoShiftModal={this.clockIntoShiftModal}
           closeClockIntoShiftModal={this.closeClockIntoShiftModal}
         />
       </View>
@@ -326,7 +325,6 @@ const styles = StyleSheet.create({
   
 });
 
-
 const mapDispatchToProps = dispatch => {
   return {
     onSaveCurrentScreen: screen => dispatch(saveCurrentScreen(screen))
@@ -334,9 +332,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  // mapStateToProps,
   null,
   mapDispatchToProps
 )(TodayScreen);
 
-// export default TodayScreen;
